@@ -1,0 +1,3 @@
+# Ignore local and generated files
+node_modules/
+.local/
