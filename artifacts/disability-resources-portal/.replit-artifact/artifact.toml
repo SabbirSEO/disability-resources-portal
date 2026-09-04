@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "DisabilityResources.org Portal"
+description = "A highly accessible disability resource portal for people with disabilities, caregivers, families, and professionals. Helps visitors search trusted information, browse support topics, find state resources, and adjust accessibility preferences."
+version = "1.0.0"
+id = "artifacts/disability-resources-portal"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18122
+
+[services.development]
+run = "pnpm --filter @workspace/disability-resources-portal run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/disability-resources-portal", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/disability-resources-portal/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18122"
+BASE_PATH = "/"
